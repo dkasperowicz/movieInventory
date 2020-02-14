@@ -1,0 +1,19 @@
+@import "../../assets/scss/style.scss";
+
+header
+{
+	background-color: $colour-black-100;
+	padding-top: $default-size;
+	padding-bottom: $default-size;
+	width: 100vw;
+
+	div
+	{
+		@include mainContentContainer;
+
+		img
+		{
+			height: $default-size * 2;
+		}
+	}
+}

@@ -1,0 +1,14 @@
+@import "../assets/scss/style.scss";
+
+main
+{
+	padding-top: $default-size;
+	padding-bottom: $default-size;
+	width: 100vw;
+	min-width: 63rem;
+
+	div
+	{
+		@include mainContentContainer;
+	}
+}
