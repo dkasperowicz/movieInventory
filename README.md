@@ -1,8 +1,16 @@
 # movieInventory Project
 A simple Movie Inventory application using Angular as the presentation-tier, PHP as the mid-tier, and MySQL as the data-tier.
 
+*Everything below assums Windows 10 is being used*
+
+## Technical Requirements
+- Apache HTTP Server 2.4.41 (or equivalent)
+- PHP 7.3.10 (recommended, but might work with older versions)
+	- Must be integrated with Apache HTTP Server
+	- pdo_mysql must be uncommended in php.ini
+- MySQL 5.7.21 (recommended, but might work with older versions)
+
 ## Installation Instructions
-*Assuming Windows 10 is being used*
 1. Download or fork project
 	 1. If downloaded, extract compressed file to director
 	 
