@@ -26,7 +26,7 @@ If you're looking to install the presentation tier and compile it yourself, plea
 5. Install Angular CLI by entering the following command: ```npm install -g @angular/cli```
 
 ### Middle Tier
-The middle is a PHP  API.
+The middle tier is a PHP  API.
 
 ### Data Tier
 The data tier uses MySQL that's accessed via the middle tier.
