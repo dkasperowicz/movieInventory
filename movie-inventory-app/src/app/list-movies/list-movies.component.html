@@ -1,0 +1,21 @@
+<article>
+	<h2>
+		List of Movies
+	</h2>
+
+	<ng-template [ngIf]="hasMovies" [ngIfElse]="hasMovies">
+		<p>
+			Unfortunately, there are no movies yet.
+		</p>
+
+		<p>
+			<button type="button" (click)="addMovie();">
+				<mat-icon>library_add</mat-icon> Add a Movie
+			</button>
+		</p>
+	</ng-template>
+
+	<ng-template #hasMovies>
+
+	</ng-template>
+</article>

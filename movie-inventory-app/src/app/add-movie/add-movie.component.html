@@ -1,0 +1,27 @@
+<h2>
+	Add a Movie
+</h2>
+
+<form>
+	<fieldset>
+		<legend>Movie Details</legend>
+		
+		<mat-form-field>
+			<mat-label>Title</mat-label>
+			<input matInput placeholder="E.g.: Spiderman" />
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Release Date</mat-label>
+			<input matInput [matDatepicker]="picker">
+			<mat-datepicker-toggle matSuffix [for]="picker">
+			  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+			</mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+	</fieldset>
+
+	<button type="submit">
+		Submit Movie
+	</button>
+</form>

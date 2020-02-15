@@ -10,5 +10,10 @@ main
 	div
 	{
 		@include mainContentContainer;
+
+		h1
+		{
+			text-align: center;
+		}
 	}
 }

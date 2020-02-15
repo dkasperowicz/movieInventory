@@ -29,6 +29,9 @@ footer, header, hgroup, menu, nav, section
 	display: block;
 }
 
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
 body
 {
 	line-height: 1;
@@ -36,6 +39,7 @@ body
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
 	text-rendering: optimizeLegibility;
 	min-width: 62.5rem;
+	margin: 0;
 }
 
 ol, ul
@@ -66,6 +70,7 @@ h3, h4,
 h5, h6
 {
 	font-family: "Raleway", "Open Sans", Helvetica, Arial, sans-serif;
+	margin-bottom: 1em;
 }
 
 h6{font-size: 1.0em;}
@@ -74,3 +79,36 @@ h4{font-size: 1.4em;}
 h3{font-size: 1.6em;}
 h2{font-size: 1.8em;}
 h1{font-size: 2em;}
+
+p
+{
+	margin-bottom: 1em;
+}
+
+a
+{
+	color: inherit;
+	text-decoration: underline;
+}
+
+fieldset
+{
+	border: 0.1em solid #000;
+	border-radius: 1em;
+	padding: 1em;
+	margin-bottom: 1em;
+
+	legend
+	{
+		padding: 1em;
+		font-weight: 700;
+		font-style: italic;
+	}
+}
+
+.mat-icon
+{
+	font-size: inherit;
+	width: inherit !important;
+	height: inherit !important;
+}
