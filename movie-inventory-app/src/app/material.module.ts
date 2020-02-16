@@ -8,14 +8,13 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSelectModule} from "@angular/material/select";
-//import {MatOptionModule} from "@angular/material/option";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {FormsModule} from "@angular/forms";
-
 
 @NgModule(
 {
@@ -31,12 +30,12 @@ import {FormsModule} from "@angular/forms";
 		MatSlideToggleModule,
 		MatCheckboxModule,
 		MatSelectModule,
-		//MatOptionModule,
 		MatTooltipModule,
 		MatTableModule,
 		MatSortModule,
 		MatPaginatorModule,
-		MatDatepickerModule
+		MatDatepickerModule,
+		MatMomentDateModule
 	]
 })
 

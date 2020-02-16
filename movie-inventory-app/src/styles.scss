@@ -103,6 +103,7 @@ fieldset
 		padding: 1em;
 		font-weight: 700;
 		font-style: italic;
+		width: auto;
 	}
 }
 
@@ -112,3 +113,10 @@ fieldset
 	width: inherit !important;
 	height: inherit !important;
 }
+
+.italic
+{
+	font-style: italic;
+}
+
+:disabled{cursor: not-allowed;}

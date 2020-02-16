@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import {ApiService} from '../_services/api.service';
 import {MovieInterface} from '../_interfaces/movie-interface';
 import {Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component(
 {
@@ -13,11 +15,19 @@ import {Router} from '@angular/router';
 
 export class ListMoviesComponent implements OnInit
 {
-	movieList: MovieInterface[] = [];
-	hasMovies: boolean;
+	noMovies: boolean = true;
+	movieList = new MatTableDataSource<MovieInterface>();
+	movieTableCols: String[] = ["title", "releaseDate", "genreName", "description"];
+
+	@ViewChild(MatSort, {static: true}) sort: MatSort;
+	@ViewChild(MatSort) set matSort(ms: MatSort)
+	{
+		this.sort = ms;
+		this.setDataSourceAttributes();
+	 }
 
 	constructor(private apiService: ApiService, private router: Router){}
-	
+		
 	ngOnInit(): void
 	{
 		let json =
@@ -29,11 +39,15 @@ export class ListMoviesComponent implements OnInit
 		{
 			if(JSON.parse(JSON.stringify(response)).length > 0)
 			{
-				this.hasMovies = true;
+				this.noMovies = false;
+				
+				this.movieList.data = response;
+				
+				console.info(this.sort);
 			}
 			else
 			{
-				this.hasMovies = false;
+				this.noMovies = true;
 			}
 		});
 	}
@@ -41,5 +55,10 @@ export class ListMoviesComponent implements OnInit
 	addMovie(): void
 	{
 		this.router.navigate(["/addMovie"]);
+	}
+
+	private setDataSourceAttributes()
+	{
+		this.movieList.sort = this.sort;
 	}
 }

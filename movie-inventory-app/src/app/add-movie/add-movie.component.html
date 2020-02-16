@@ -1,27 +1,103 @@
-<h2>
-	Add a Movie
-</h2>
+<article id="addMovie">
+	<h2>
+		Add a Movie
+	</h2>
 
-<form>
-	<fieldset>
-		<legend>Movie Details</legend>
-		
-		<mat-form-field>
-			<mat-label>Title</mat-label>
-			<input matInput placeholder="E.g.: Spiderman" />
-		</mat-form-field>
+	<ng-template [ngIf]="hasGenres" [ngIfElse]="noGenres">
+		<ng-template [ngIf]="addMovie" [ngIfElse]="addedMovie">
+			<form [formGroup]="addMovieForm" (ngSubmit)="submit(addMovieForm.value);" autocomplete="off">
+				<fieldset>
+					<legend>Movie Details</legend>
 
-		<mat-form-field>
-			<mat-label>Release Date</mat-label>
-			<input matInput [matDatepicker]="picker">
-			<mat-datepicker-toggle matSuffix [for]="picker">
-			  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-			</mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
-	</fieldset>
+					<p class="italic">
+						Note: All fields are required and denoted with an asterisk (<abbr title="Required field indicator">*</abbr>)
+					</p>
 
-	<button type="submit">
-		Submit Movie
-	</button>
-</form>
+					<div class="contain">
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Title</mat-label>
+								<input matInput placeholder="E.g.: Spiderman" formControlName="title" minlength="1" maxlength="225" required />
+							</mat-form-field>
+
+							<p *ngIf="addMovieForm.controls['title'].errors?.required && (addMovieForm.controls['title'].dirty || addMovieForm.controls['title'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Title is required
+								</ngb-alert>
+							</p>
+						</div>
+
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Release Date</mat-label>
+								<input matInput [matDatepicker]="picker" placeholder="E.g.: 2019-12-31" formControlName="releaseDate" required>
+								<mat-datepicker-toggle matSuffix [for]="picker">
+									<mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+								</mat-datepicker-toggle>
+								<mat-datepicker #picker></mat-datepicker>
+							</mat-form-field>
+
+							<p *ngIf="addMovieForm.controls['releaseDate'].errors?.required && (addMovieForm.controls['releaseDate'].dirty || addMovieForm.controls['releaseDate'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Release Date is required
+								</ngb-alert>
+							</p>
+						</div>
+
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Genre</mat-label>
+								<mat-select formControlName="genre" required>
+									<mat-optgroup label="Genre List">
+										<mat-option *ngFor="let genre of genreList" [value]="genre.genreID">
+											{{genre.genreName}}
+										</mat-option>
+									</mat-optgroup>
+								</mat-select>
+							</mat-form-field>
+
+							<p *ngIf="addMovieForm.controls['genre'].errors?.required && (addMovieForm.controls['genre'].dirty || addMovieForm.controls['genre'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Genre is required
+								</ngb-alert>
+							</p>
+						</div>
+
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Description</mat-label>
+								<textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="description" minlength="1" required></textarea>
+							</mat-form-field>
+
+							<p *ngIf="addMovieForm.controls['description'].errors?.required && (addMovieForm.controls['description'].dirty || addMovieForm.controls['description'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Description is required
+								</ngb-alert>
+							</p>
+						</div>
+					</div>
+				</fieldset>
+
+				<button type="submit"[disabled]="addMovieForm.invalid || submitted">
+					Submit Movie
+				</button>
+			</form>
+		</ng-template>
+
+		<ng-template #addedMovie>
+			<p>
+				The movie has been successfully entered.
+			</p>
+
+			<p>
+				Return to the <a href="/" title="Movie List">movie list page</a>.
+			</p>
+		</ng-template>
+	</ng-template>
+	
+	<ng-template #noGenres>
+		<p>
+			We're sorry, but there seems to have been a system error.  Please try refreshing this page to try again.
+		</p>
+	</ng-template>
+<article>

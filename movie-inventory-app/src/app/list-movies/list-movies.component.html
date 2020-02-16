@@ -1,21 +1,76 @@
-<article>
+<article id="movieList">
 	<h2>
 		List of Movies
 	</h2>
 
-	<ng-template [ngIf]="hasMovies" [ngIfElse]="hasMovies">
+	<ng-template [ngIf]="noMovies" [ngIfElse]="showMovies">
 		<p>
 			Unfortunately, there are no movies yet.
 		</p>
-
-		<p>
-			<button type="button" (click)="addMovie();">
-				<mat-icon>library_add</mat-icon> Add a Movie
-			</button>
-		</p>
 	</ng-template>
 
-	<ng-template #hasMovies>
+	<ng-template #showMovies>
+		<table mat-table [dataSource]="movieList" matSort aria-label="List of movies">
+			<ng-container matColumnDef="title">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					<p>
+						Title
+					</p>
+				</th>
+				<td mat-cell *matCellDef="let movie">
+					<p>
+						{{movie.title}}
+					</p>
+				</td>
+			</ng-container>
 
+			<ng-container matColumnDef="releaseDate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					<p>
+						Release Date
+					</p>
+				</th>
+				<td mat-cell *matCellDef="let movie">
+					<p>
+						{{movie.releaseDate}}
+					</p>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="genreName">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>
+					<p>
+						Genre
+					</p>
+				</th>
+				<td mat-cell *matCellDef="let movie">
+					<p>
+						{{movie.genreName}}
+					</p>
+				</td>
+			</ng-container>
+
+			<ng-container matColumnDef="description">
+				<th mat-header-cell *matHeaderCellDef>
+					<p>
+						Description
+					</p>
+				</th>
+				<td mat-cell *matCellDef="let movie">
+					<p>
+						{{movie.description}}
+					</p>
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="movieTableCols"></tr>
+			<tr mat-row *matRowDef="let row; columns: movieTableCols"></tr>
+		</table>
 	</ng-template>
+
+	<p>
+		<button type="button" (click)="addMovie();" >
+			<mat-icon>library_add</mat-icon> Add a Movie
+		</button>
+	</p>
 </article>
