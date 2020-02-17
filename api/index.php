@@ -23,6 +23,49 @@
 			return $this->getResponse($query);
 		}
 
+		public function getMovie($movieID)
+		{
+			$query = "call getMovie($movieID)";
+
+			return $this->getResponse($query);
+		}
+
+		public function updateMovie($movie)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$movieID = $movie["movieID"];
+			$title = $movie["title"];
+			$releaseDate = date("y/m/d", strtotime($movie["releaseDate"]));
+			$description = $movie["description"];
+			$genreID = $movie["genre"];
+
+			$query = "call updateMovie(:movieID, :title, :releaseDate, :description, :genreID)";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":movieID", $movieID);
+			$statement->bindParam(":title", $title);
+			$statement->bindParam(":releaseDate", $releaseDate);
+			$statement->bindParam(":description", $description);
+			$statement->bindParam(":genreID", $genreID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
 		public function setMovie($movie)
 		{
 			$response = array
@@ -35,9 +78,40 @@
 			$description = $movie["description"];
 			$genreID = $movie["genre"];
 
-			$query = "call setMovie('$title', '$releaseDate', '$description', $genreID);";
+			$query = "call setMovie(:title, :releaseDate, :description, :genreID);";
 
 			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":title", $title);
+			$statement->bindParam(":releaseDate", $releaseDate);
+			$statement->bindParam(":description", $description);
+			$statement->bindParam(":genreID", $genreID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function deleteMovie($movieID)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$query = "call deleteMovie(:movieID);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":movieID", $movieID);
 
 			if($statement->execute())
 			{
@@ -91,15 +165,28 @@
 
 			if($decoded["action"] == "getMovies")
 			{
-				echo (json_encode($apiObject->getMovies()));
+				echo(json_encode($apiObject->getMovies()));
+			}
+			else if($decoded["action"] == "getMovie")
+			{
+				echo(json_encode($apiObject->getMovie($decoded['movieID'])));
+			}
+
+			else if($decoded["action"] == "setMovie")
+			{
+				echo(json_encode($apiObject->setMovie($decoded)));
+			}
+			else if($decoded["action"] == "updateMovie")
+			{
+				echo(json_encode($apiObject->updateMovie($decoded)));
+			}
+			else if($decoded["action"] == "deleteMovie")
+			{
+				echo(json_encode($apiObject->deleteMovie($decoded["movieID"])));
 			}
 			else if($decoded["action"] == "getGenres")
 			{
-				echo (json_encode($apiObject->getGenres()));
-			}
-			else if($decoded["action"] == "setMovie")
-			{
-				echo (json_encode($apiObject->setMovie($decoded)));
+				echo(json_encode($apiObject->getGenres()));
 			}
 		}
 	}

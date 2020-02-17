@@ -13,6 +13,8 @@ import {MaterialModule} from './material.module';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {ReactiveFormsModule} from "@angular/forms";
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 
 @NgModule(
 {
@@ -23,7 +25,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 		FooterComponent,
 		ListMoviesComponent,
 		Error404Component,
-		AddMovieComponent
+		AddMovieComponent,
+		MovieDetailsComponent,
+		ModalDeleteComponent
 	],
 	imports:
 	[
@@ -39,7 +43,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 	{
 		provide: MAT_DATE_LOCALE, useValue: "en-ca"
 	}],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [ModalDeleteComponent]
 })
 
 export class AppModule{}

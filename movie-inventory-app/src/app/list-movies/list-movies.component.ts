@@ -33,7 +33,7 @@ export class ListMoviesComponent implements OnInit
 		let json =
 		{
 			action: "getMovies"
-		}
+		};
 
 		this.apiService.call(JSON.stringify(json)).subscribe(response =>
 		{

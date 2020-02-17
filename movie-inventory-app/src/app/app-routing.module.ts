@@ -3,6 +3,7 @@ import {Routes, RouterModule} from "@angular/router";
 import {ListMoviesComponent} from './list-movies/list-movies.component';
 import {Error404Component} from './error404/error404.component';
 import {AddMovieComponent} from './add-movie/add-movie.component';
+import {MovieDetailsComponent} from './movie-details/movie-details.component';
 
 const routes: Routes =
 [
@@ -13,6 +14,10 @@ const routes: Routes =
 	{
 		path: "addMovie",
 		component: AddMovieComponent
+	},
+	{
+		path: "details/:movieID",
+		component: MovieDetailsComponent
 	},
 	{
 		path: "**",

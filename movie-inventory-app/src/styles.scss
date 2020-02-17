@@ -107,6 +107,16 @@ fieldset
 	}
 }
 
+strong
+{
+	font-weight: 700;;
+}
+
+em
+{
+	font-style: italic;
+}
+
 .mat-icon
 {
 	font-size: inherit;
@@ -119,4 +129,16 @@ fieldset
 	font-style: italic;
 }
 
-:disabled{cursor: not-allowed;}
+.buttonContainer
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+:disabled
+{
+	cursor: not-allowed;
+	opacity: 0.5;
+}

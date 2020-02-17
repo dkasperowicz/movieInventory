@@ -1,11 +1,11 @@
-<article id="addMovie">
+<article id="movieDetails">
 	<h2>
-		Add a Movie
+		Manage Movie
 	</h2>
 
 	<ng-template [ngIf]="hasGenres" [ngIfElse]="noGenres">
-		<ng-template [ngIf]="addMovie" [ngIfElse]="addedMovie">
-			<form [formGroup]="addMovieForm" (ngSubmit)="submit(addMovieForm.value);" autocomplete="off">
+		<ng-template [ngIf]="formStatus == 'normal'">
+			<form [formGroup]="movieDetailsForm" (ngSubmit)="submit(movieDetailsForm.value);" autocomplete="off">
 				<fieldset>
 					<legend>Movie Details</legend>
 
@@ -20,7 +20,7 @@
 								<input matInput placeholder="E.g.: Spiderman" formControlName="title" minlength="1" maxlength="225" required />
 							</mat-form-field>
 
-							<p *ngIf="addMovieForm.controls['title'].errors?.required && (addMovieForm.controls['title'].dirty || addMovieForm.controls['title'].touched)">
+							<p *ngIf="movieDetailsForm.controls['title'].errors?.required && (movieDetailsForm.controls['title'].dirty || movieDetailsForm.controls['title'].touched)">
 								<ngb-alert type="danger" [dismissible]="false">
 									Title is required
 								</ngb-alert>
@@ -37,7 +37,7 @@
 								<mat-datepicker #picker></mat-datepicker>
 							</mat-form-field>
 
-							<p *ngIf="addMovieForm.controls['releaseDate'].errors?.required && (addMovieForm.controls['releaseDate'].dirty || addMovieForm.controls['releaseDate'].touched)">
+							<p *ngIf="movieDetailsForm.controls['releaseDate'].errors?.required && (movieDetailsForm.controls['releaseDate'].dirty || movieDetailsForm.controls['releaseDate'].touched)">
 								<ngb-alert type="danger" [dismissible]="false">
 									Release Date is required
 								</ngb-alert>
@@ -56,7 +56,7 @@
 								</mat-select>
 							</mat-form-field>
 
-							<p *ngIf="addMovieForm.controls['genre'].errors?.required && (addMovieForm.controls['genre'].dirty || addMovieForm.controls['genre'].touched)">
+							<p *ngIf="movieDetailsForm.controls['genre'].errors?.required && (movieDetailsForm.controls['genre'].dirty || movieDetailsForm.controls['genre'].touched)">
 								<ngb-alert type="danger" [dismissible]="false">
 									Genre is required
 								</ngb-alert>
@@ -69,7 +69,7 @@
 								<textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="description" minlength="1" required></textarea>
 							</mat-form-field>
 
-							<p *ngIf="addMovieForm.controls['description'].errors?.required && (addMovieForm.controls['description'].dirty || addMovieForm.controls['description'].touched)">
+							<p *ngIf="movieDetailsForm.controls['description'].errors?.required && (movieDetailsForm.controls['description'].dirty || movieDetailsForm.controls['description'].touched)">
 								<ngb-alert type="danger" [dismissible]="false">
 									Description is required
 								</ngb-alert>
@@ -79,10 +79,14 @@
 				</fieldset>
 
 				<div class="buttonContainer">
-					<button type="submit" [disabled]="addMovieForm.invalid || submitted">
-						Submit Movie
+					<button type="submit" [disabled]="movieDetailsForm.invalid || movieDetailsForm.pristine || submitted">
+						Update Details
 					</button>
-
+		
+					<button type="button" (click)="confirmDelete();">
+						Delete Movie
+					</button>
+		
 					<button type="button" (click)="returnHome();">
 						Cancel
 					</button>
@@ -90,9 +94,19 @@
 			</form>
 		</ng-template>
 
-		<ng-template #addedMovie>
+		<ng-template [ngIf]="formStatus == 'deleted'">
 			<p>
-				The movie has been successfully entered.
+				Success!  You've successfully deleted the movie.
+			</p>
+
+			<p>
+				Return to the <a href="/" title="Movie List">movie list page</a>.
+			</p>
+		</ng-template>
+		
+		<ng-template [ngIf]="formStatus == 'updated'">
+			<p>
+				Success!  You've successfully updated the movie details.
 			</p>
 
 			<p>
@@ -100,10 +114,10 @@
 			</p>
 		</ng-template>
 	</ng-template>
-	
+
 	<ng-template #noGenres>
 		<p>
 			We're sorry, but there seems to have been a system error.  Please try refreshing this page to try again.
 		</p>
 	</ng-template>
-<article>
+</article>

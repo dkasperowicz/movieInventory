@@ -1,6 +1,4 @@
-@import "../../assets/scss/style.scss";
-
-article#addMovie
+article#movieDetails
 {
 	fieldset
 	{
@@ -9,7 +7,7 @@ article#addMovie
 			padding-top: 0;
 			padding-bottom: 0;
 		}
-
+		
 		div.contain
 		{
 			display: flex;

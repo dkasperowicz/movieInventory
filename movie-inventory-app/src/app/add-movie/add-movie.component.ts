@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {ApiService} from '../_services/api.service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component(
 {
@@ -18,11 +19,10 @@ export class AddMovieComponent implements OnInit
 	submitted: boolean = false;
 	addMovie: boolean = true;
 
-	constructor(private apiService: ApiService, private formBuilder: FormBuilder){}
+	constructor(private router: Router, private apiService: ApiService, private formBuilder: FormBuilder){}
 	
 	ngOnInit(): void
 	{
-
 		this.addMovieForm = this.formBuilder.group(
 		{
 			title: ["", [Validators.required]],
@@ -34,7 +34,7 @@ export class AddMovieComponent implements OnInit
 		let json =
 		{
 			action: "getGenres"
-		}
+		};
 
 		this.apiService.call(JSON.stringify(json)).subscribe(response =>
 		{
@@ -66,10 +66,15 @@ export class AddMovieComponent implements OnInit
 			}
 			else
 			{
-
+				this.hasGenres = false;
 			}
 
 			this.submitted = false;
 		});
+	}
+
+	returnHome(): void
+	{
+		this.router.navigate(["/"]);
 	}
 }
