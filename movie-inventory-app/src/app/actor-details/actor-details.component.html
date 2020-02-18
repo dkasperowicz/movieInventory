@@ -1,0 +1,73 @@
+<article id="actorDetails">
+	<h2>
+		Add Actor
+	</h2>
+
+	<ng-template [ngIf]="noError" [ngIfElse]="error">
+		<ng-template [ngIf]="noUpdateActor" [ngIfElse]="updatedActor">
+			<form [formGroup]="actorDetailsForm" (ngSubmit)="submit(actorDetailsForm.value);" autocomplete="off">
+				<fieldset>
+					<legend>Update Actor Details</legend>
+
+					<p class="italic">
+						Note: All fields are required and denoted with an asterisk (<abbr title="Required field indicator">*</abbr>)
+					</p>
+
+					<div class="contain">
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Given Name</mat-label>
+								<input matInput placeholder="E.g.: John" formControlName="givenName" minlength="1" maxlength="225" required />
+							</mat-form-field>
+
+							<p *ngIf="actorDetailsForm.controls['givenName'].errors?.required && (actorDetailsForm.controls['givenName'].dirty || actorDetailsForm.controls['givenName'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Given name is required
+								</ngb-alert>
+							</p>
+						</div>
+
+						<div class="fieldContain">
+							<mat-form-field>
+								<mat-label>Surname</mat-label>
+								<input matInput placeholder="E.g.: Smith" formControlName="surname" minlength="1" maxlength="225" required />
+							</mat-form-field>
+
+							<p *ngIf="actorDetailsForm.controls['surname'].errors?.required && (actorDetailsForm.controls['surname'].dirty || actorDetailsForm.controls['surname'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Given name is required
+								</ngb-alert>
+							</p>
+						</div>
+					</div>
+				</fieldset>
+
+				<div class="buttonContainer">
+					<button type="submit" [disabled]="actorDetailsForm.invalid || actorDetailsForm.pristine || submitted">
+						Update Actor
+					</button>
+
+					<button type="button" (click)="returnHome();">
+						Cancel
+					</button>
+				</div>
+			</form>
+		</ng-template>
+
+		<ng-template #updatedActor>
+			<p>
+				The actor has been successfully updated.
+			</p>
+
+			<p>
+				Return to the <a href="/" title="Actor and Movie List">actor and movie list page</a>.
+			</p>
+		</ng-template>
+	</ng-template>
+		
+	<ng-template #error>
+		<p>
+			We're sorry, but there seems to have been a system error.  Please try refreshing this page to try again.
+		</p>
+	</ng-template>
+</article>

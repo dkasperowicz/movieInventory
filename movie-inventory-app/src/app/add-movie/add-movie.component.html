@@ -65,6 +65,25 @@
 
 						<div class="fieldContain">
 							<mat-form-field>
+								<mat-label>Actors</mat-label>
+								<mat-select formControlName="actors" required multiple>
+									<mat-optgroup label="Actor List">
+										<mat-option *ngFor="let actor of actorList" [value]="actor.actorID">
+											{{actor.givenName}} {{actor.surname}}
+										</mat-option>
+									</mat-optgroup>
+								</mat-select>
+							</mat-form-field>
+
+							<p *ngIf="addMovieForm.controls['actors'].errors?.required && (addMovieForm.controls['actors'].dirty || addMovieForm.controls['actors'].touched)">
+								<ngb-alert type="danger" [dismissible]="false">
+									Actors are required
+								</ngb-alert>
+							</p>
+						</div>
+
+						<div class="fieldContain">
+							<mat-form-field>
 								<mat-label>Description</mat-label>
 								<textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="description" minlength="1" required></textarea>
 							</mat-form-field>
@@ -96,7 +115,7 @@
 			</p>
 
 			<p>
-				Return to the <a href="/" title="Movie List">movie list page</a>.
+				Return to the <a href="/" title="Actor and Movie List">actor and movie list page</a>.
 			</p>
 		</ng-template>
 	</ng-template>

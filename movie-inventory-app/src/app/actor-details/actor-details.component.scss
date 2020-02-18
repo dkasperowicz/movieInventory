@@ -1,6 +1,4 @@
-@import "../../assets/scss/style.scss";
-
-article#addMovie
+article#actorDetails
 {
 	fieldset
 	{
@@ -21,13 +19,12 @@ article#addMovie
 			div.fieldContain
 			{
 				padding: 0;
-			}
+				width: 45%;
 
-			div.fieldContain:last-child,
-			div.fieldContain:nth-child(4),
-			mat-form-field
-			{
-				width: 100%;
+				mat-form-field
+				{
+					width: 100%;
+				}
 			}
 
 			.mat-select-value

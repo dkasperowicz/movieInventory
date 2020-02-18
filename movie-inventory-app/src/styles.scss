@@ -137,6 +137,21 @@ em
 	justify-content: space-between;
 }
 
+button.link
+{
+	border: 0;
+	background: none;
+	margin: 0;
+	padding: 0;
+	text-decoration: underline;
+}
+
+a:hover,
+button.link:hover
+{
+	color: #0056b3 !important;
+}
+
 :disabled
 {
 	cursor: not-allowed;

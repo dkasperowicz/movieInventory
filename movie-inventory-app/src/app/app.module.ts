@@ -15,6 +15,11 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {ReactiveFormsModule} from "@angular/forms";
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
+import { ListActorsComponent } from './list-actors/list-actors.component';
+import { HomeComponent } from './home/home.component';
+import { AddActorComponent } from './add-actor/add-actor.component';
+import { ActorDetailsComponent } from './actor-details/actor-details.component';
+import { ModalDeleteActorComponent } from './modal-delete-actor/modal-delete-actor.component';
 
 @NgModule(
 {
@@ -27,7 +32,12 @@ import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 		Error404Component,
 		AddMovieComponent,
 		MovieDetailsComponent,
-		ModalDeleteComponent
+		ModalDeleteComponent,
+		ListActorsComponent,
+		HomeComponent,
+		AddActorComponent,
+		ActorDetailsComponent,
+		ModalDeleteActorComponent
 	],
 	imports:
 	[

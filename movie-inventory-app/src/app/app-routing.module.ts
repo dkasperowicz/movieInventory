@@ -1,15 +1,25 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {ListMoviesComponent} from './list-movies/list-movies.component';
 import {Error404Component} from './error404/error404.component';
 import {AddMovieComponent} from './add-movie/add-movie.component';
 import {MovieDetailsComponent} from './movie-details/movie-details.component';
+import {HomeComponent} from './home/home.component';
+import {AddActorComponent} from './add-actor/add-actor.component';
+import {ActorDetailsComponent} from './actor-details/actor-details.component';
 
 const routes: Routes =
 [
 	{
 		path: "",
-		component: ListMoviesComponent
+		component: HomeComponent
+	},
+	{
+		path: "addActor",
+		component: AddActorComponent
+	},
+	{
+		path: "actorDetails/:actorID",
+		component: ActorDetailsComponent
 	},
 	{
 		path: "addMovie",

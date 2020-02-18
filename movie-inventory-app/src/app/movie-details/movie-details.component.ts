@@ -5,6 +5,7 @@ import {ApiService} from '../_services/api.service';
 import {ModalDeleteComponent} from "../modal-delete/modal-delete.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../_services/data.service';
+import {ActorInterface} from '../_interfaces/actor-interface';
 
 @Component(
 {
@@ -21,6 +22,7 @@ export class MovieDetailsComponent implements OnInit
 	hasGenres: boolean;
 	submitted: boolean = false;
 	formStatus: string = "normal";
+	actorList: ActorInterface[] = [];
 
 	constructor(private dataService: DataService, private modalService: NgbModal, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private apiService: ApiService){}
 
@@ -47,7 +49,8 @@ export class MovieDetailsComponent implements OnInit
 				title: ["", [Validators.required]],
 				releaseDate: ["", [Validators.required]],
 				genre: ["", [Validators.required]],
-				description: ["", [Validators.required]]
+				description: ["", [Validators.required]],
+				actors: [null, [Validators.required]]
 			});
 
 			let json =
@@ -61,6 +64,23 @@ export class MovieDetailsComponent implements OnInit
 				{
 					this.hasGenres = true;
 					this.genreList = JSON.parse(JSON.stringify(response));
+				}
+				else
+				{
+					this.hasGenres = false;
+				}
+			});
+
+			let json3 =
+			{
+				action: "getActors"
+			};
+
+			this.apiService.call(JSON.stringify(json3)).subscribe(response =>
+			{
+				if(JSON.parse(JSON.stringify(response)).length > 0)
+				{
+					this.actorList = JSON.parse(JSON.stringify(response));
 				}
 				else
 				{
@@ -88,6 +108,27 @@ export class MovieDetailsComponent implements OnInit
 					this.hasGenres = false;
 				}
 			});
+
+			let json4 =
+			{
+				action: "getActorsInMovie",
+				movieID: movieID
+			};
+
+			this.apiService.call(JSON.stringify(json4)).subscribe(response =>
+			{
+				let selectedList: number[] =[];
+
+				for(let index in response)
+				{
+					selectedList.push(response[index]["actorID"]);
+				}
+
+				if(selectedList[0] !== undefined)
+				{
+					this.movieDetailsForm.controls["actors"].setValue(selectedList);
+				}
+			});
 		}
 	}
 
@@ -104,6 +145,8 @@ export class MovieDetailsComponent implements OnInit
 		{
 			if(JSON.parse(JSON.stringify(response)).success)
 			{
+				this.updateActorsInMovie(json.movieID, json.actors);
+
 				this.formStatus = "updated";
 			}
 			else
@@ -115,8 +158,53 @@ export class MovieDetailsComponent implements OnInit
 		});
 	}
 
+	private updateActorsInMovie(movieID: number, actors: number[]): void
+	{
+		this.deleteAllActorsToMovie(movieID);
+
+		for(let index in actors)
+		{
+			if(this.hasGenres)
+			{
+				let json2 =
+				{
+					action: "addActorToMovie",
+					movieID: movieID,
+					actorID: actors[index]
+				};
+
+				this.apiService.call(JSON.stringify(json2)).subscribe(response =>
+				{
+					if(!JSON.parse(JSON.stringify(response)).success)
+					{
+						this.hasGenres = false;
+					}
+				});
+			}
+		}
+	}
+
+	private deleteAllActorsToMovie(movieID: number): void
+	{
+		let json =
+		{
+			action: "deleteAllActorsToMovie",
+			movieID: movieID,
+		};
+
+		this.apiService.call(JSON.stringify(json)).subscribe(response =>
+		{
+			if(!JSON.parse(JSON.stringify(response)).success)
+			{
+				this.hasGenres = false;
+			}
+		});
+	}
+
 	private deleteMovie(): void
 	{
+		this.deleteAllActorsToMovie(Number.parseInt(this.route.snapshot.paramMap.get("movieID")));
+
 		let json =
 		{
 			movieID: Number.parseInt(this.route.snapshot.paramMap.get("movieID")),

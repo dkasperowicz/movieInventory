@@ -1,0 +1,40 @@
+@import "../../assets/scss/style.scss";
+
+article#actorList
+{
+	table
+	{
+		width: 100%;
+
+		thead, tbody
+		{
+			tr.mat-header-row,
+			tr.mat-row
+			{
+				height: auto;
+
+				th.mat-header-cell,
+				td.mat-cell
+				{
+					padding: $default-size;
+
+					p
+					{
+						margin: 0;
+					}
+
+					ngb-alert
+					{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.buttonContainer
+	{
+		margin-top: $default-size;
+		margin-bottom: $default-size;
+	}
+}

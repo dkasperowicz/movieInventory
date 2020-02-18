@@ -1,0 +1,25 @@
+<div id="modalDeleteActor">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-primary-title">Verify Deletion</h3>
+	</div>
+
+	<div class="modal-body centered">
+		<p>
+			<strong>Are you sure you want to go through with this delete action?</strong>
+		</p>
+		
+		<p>
+			All information associated to this user profile will be permanently deleted.  <strong class="text-danger"><em>This operation can not be undone.</em></strong>
+		</p>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss()">
+			No
+		</button>
+
+		<button type="button" class="btn btn-danger" (click)="setMessage('deleteActorConfirmed');">
+			Yes
+		</button>
+	</div>
+</div>
