@@ -91,9 +91,14 @@
 			{
 				$statement->closeCursor();
 
+				$query = "select LAST_INSERT_ID()";
+
+				$lastMovieID = $this->getResponse($query);
+
 				$response = array
 				(
-					"success" => true
+					"success" => true,
+					"movieID" => $lastMovieID
 				);
 			}
 
@@ -133,9 +138,214 @@
 			return $this->getResponse($query);
 		}
 
+		public function getActors()
+		{
+			$query = "call getActors();";
+
+			return $this->getResponse($query);
+		}
+
+		public function setActor($actor)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$givenName = $actor["givenName"];
+			$surname = $actor["surname"];			
+
+			$query = "call setActor(:givenName, :surname);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":givenName", $givenName);
+			$statement->bindParam(":surname", $surname);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function deleteActor($actorID)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$query = "call deleteActor(:actorID);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":actorID", $actorID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function getActor($actorID)
+		{
+			$query = "call getActor($actorID)";
+
+			return $this->getResponse($query);
+		}
+
+		public function updateActor($actor)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$actorID = $actor["actorID"];
+			$givenName = $actor["givenName"];
+			$surname = $actor["surname"];
+
+			$query = "call updateActor(:actorID, :givenName, :surname)";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":actorID", $actorID);
+			$statement->bindParam(":givenName", $givenName);
+			$statement->bindParam(":surname", $surname);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function addActorToMovie($actorAndMovie)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$actorID = $actorAndMovie["actorID"];
+			$movieID = $actorAndMovie["movieID"];			
+
+			$query = "call addActorToMovie(:actorID, :movieID);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":actorID", $actorID);
+			$statement->bindParam(":movieID", $movieID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function deleteActorToMovie($actorAndMovie)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$actorID = $actorAndMovie["actorID"];
+			$movieID = $actorAndMovie["movieID"];
+
+			$query = "call deleteActorToMovie(:actorID, :movieID);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":actorID", $actorID);
+			$statement->bindParam(":movieID", $movieID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function deleteAllActorsToMovie($movieID)
+		{
+			$response = array
+			(
+				"success" => false
+			);
+
+			$query = "call deleteAllActorsToMovie(:movieID);";
+
+			$statement = $this->connect->prepare($query);
+
+			$statement->bindParam(":movieID", $movieID);
+
+			if($statement->execute())
+			{
+				$statement->closeCursor();
+
+				$response = array
+				(
+					"success" => true
+				);
+			}
+
+			return $response;
+		}
+
+		public function getActorsInMovie($movieID)
+		{
+			$query = "call getActorsInMovie($movieID)";
+
+			return $this->getResponse($query);
+		}
+
+		public function getMoviesWithActor($actorID)
+		{
+			$query = "call getMoviesWithActor($actorID);";
+
+			return $this->getResponse($query);
+		}
+
 		private function getResponse($query)
 		{
-			$response = "";
+			$response = array
+			(
+				"success" => false
+			);
 
 			$statement = $this->connect->prepare($query);
 
@@ -187,6 +397,46 @@
 			else if($decoded["action"] == "getGenres")
 			{
 				echo(json_encode($apiObject->getGenres()));
+			}
+			else if($decoded["action"] == "getActors")
+			{
+				echo(json_encode($apiObject->getActors()));
+			}
+			else if($decoded["action"] == "deleteActor")
+			{
+				echo(json_encode($apiObject->deleteActor($decoded["actorID"])));
+			}
+			else if($decoded["action"] == "getActor")
+			{
+				echo(json_encode($apiObject->getActor($decoded["actorID"])));
+			}
+			else if($decoded["action"] == "setActor")
+			{
+				echo(json_encode($apiObject->setActor($decoded)));
+			}
+			else if($decoded["action"] == "updateActor")
+			{
+				echo(json_encode($apiObject->updateActor($decoded)));
+			}
+			else if($decoded["action"] == "addActorToMovie")
+			{
+				echo(json_encode($apiObject->addActorToMovie($decoded)));
+			}
+			else if($decoded["action"] == "deleteActorToMovie")
+			{
+				echo(json_encode($apiObject->deleteActorToMovie($decoded)));
+			}
+			else if($decoded["action"] == "deleteAllActorsToMovie")
+			{
+				echo(json_encode($apiObject->deleteAllActorsToMovie($decoded["movieID"])));
+			}
+			else if($decoded["action"] == "getActorsInMovie")
+			{
+				echo(json_encode($apiObject->getActorsInMovie($decoded["movieID"])));
+			}
+			else if($decoded["action"] == "getMoviesWithActor")
+			{
+				echo(json_encode($apiObject->getMoviesWithActor($decoded["actorID"])));
 			}
 		}
 	}
