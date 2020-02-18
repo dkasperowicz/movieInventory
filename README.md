@@ -14,11 +14,11 @@ Live Demo Site: https://movieinventory.dawidk.ca/
 	- pdo_mysql must be uncommended in php.ini
 - MySQL 5.7.21 (recommended, but might work with older versions)
 - Browsers application tested and working in the latest versions of:
-	- Mozilla Firefox
-	- Microsoft Edge (new one, *not* legacy!)
-	- Brave
-	- Google Chrome
-	- Opera
+	- Mozilla Firefox: https://www.mozilla.org/en-CA/
+	- Microsoft Edge (new one, *not* legacy!): https://www.microsoft.com/en-us/edge
+	- Brave: https://brave.com/download/
+	- Google Chrome: https://www.google.com/chrome/
+	- Opera: https://www.opera.com/
 
 ## Installation Instructions
 Get a copy of the project on your environment; ensure it is extracted if received in a compressed file.
