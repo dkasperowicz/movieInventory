@@ -1,7 +1,7 @@
 # Movie Inventory Project
 A simple Movie Inventory application using Angular as the presentation-tier, PHP as the mid-tier, and MySQL as the data-tier.
 
-Live Demo Site: https://dawidk.ca/movieInventory/
+Live Demo Site: https://movieinventory.dawidk.ca/
 
 *Everything below assumes Windows 10 is being used*
 
