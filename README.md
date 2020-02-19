@@ -50,6 +50,10 @@ Inside the *api* folder, you will find one PHP files named *index.php* that cont
 Once the necessary changes are made, save the changes.
 	 
 ### Presentation Tier
-The presentation tier comes precompiled and ready to be deployed on your environment.  To use the precompiled code, ensure that the contents of the *dist* folder are on root level of your web server; don't put the *dist* folder itself on the root level of your web server.  In the case of Apache HTTP server, this will be right in the *htdocs* folder.  You will be able to access it through the following url once your instance of Apache HTTP server is running with the code placed in the root director: http://localhost/.  If you choose to place the code in a subfolder within the root directory, the files will need to be modified to work in a subdirectory; this is beyond the scope of this guide.
+The presentation tier comes precompiled and ready to be deployed on your environment.  To use the precompiled code, ensure that the contents of the *dist* folder are on root level of your web server; don't put the *dist* folder itself on the root level of your web server.  In the case of Apache HTTP server, this will be right in the *htdocs* folder.  You will be able to access it through the following url once your instance of Apache HTTP server is running with the code placed in the root director: http://localhost/.
 
-Source code for the presentation tier can be found in the *movie-inventory-app* directory; it includes the entire Angular presentation tier source code where you're able to compile it yourself.
+A *.htaccess* file is included to help with navigating the presentation layer routing rules and with browser caching.
+
+If you choose to place the code in a subfolder within the root directory, the files will need to be modified to work in a subdirectory; this is beyond the scope of this guide.
+
+Source code for the presentation tier can be found in the *movie-inventory-app* directory; it includes the entire Angular presentation tier source code where you're able to compile it yourself, or run it using the NodeJS development server that comes with Angular CLI (assuming you have it installed).  In the event you opt to run the presentation tier in the development server, the middle tier will still need to exist on a seperate web server that has PHP integrated with it and running on port 80.
