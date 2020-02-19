@@ -29,7 +29,7 @@ The data tier uses MySQL that's accessed via the middle tier.  Setup scripts are
 - The database name is able to be *dawid_movieinventory*.
 	- If this name isn't possible on the environment, you will:
 		- need to change all instances of *dawid_movieinventory*, to something that is acceptable for your particular environment, or,
-		- create a database schema yourself and delete all instances of ```CREATE DATABASE  IF NOT EXISTS `dawid_movieinventory``` from every script that contains it and change all instances of ```USE `dawid_movieinventory`;``` to that of your manually created database schema.
+		- create a database schema yourself and delete all instances of ```CREATE DATABASE  IF NOT EXISTS `dawid_movieinventory```` from every script that contains it and change all instances of ```USE `dawid_movieinventory`;``` to that of your manually created database schema.
 - The username to access this schema is *dawid_movieinventory* and has at last *delete*, *select*, *insert*, and *update* permissions.
 	- If this name isn't possible on th environment, you will need to create your own user account that has the aformentioned permissions.
 
