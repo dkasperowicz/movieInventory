@@ -39,7 +39,7 @@
 
 			$movieID = $movie["movieID"];
 			$title = $movie["title"];
-			$releaseDate = date("y/m/d", strtotime($movie["releaseDate"]));
+			$releaseDate = date("Y-n-j", strtotime($movie["releaseDate"]));
 			$description = $movie["description"];
 			$genreID = $movie["genre"];
 

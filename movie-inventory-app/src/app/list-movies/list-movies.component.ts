@@ -102,11 +102,7 @@ export class ListMoviesComponent implements OnInit
 
 				movie.actors = listOfActors;
 			});
-
-			console.info(this.movieList.data);
 		}
-
-		console.info();
 	}
 
 	addMovie(): void
