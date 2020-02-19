@@ -29,7 +29,7 @@ The data tier uses MySQL that's accessed via the middle tier.  Setup scripts are
 - The database name is able to be *dawid_movieinventory*.
 	- If this name isn't possible on the environment, you will:
 		- need to change all instances of *dawid_movieinventory*, to something that is acceptable for your particular environment, or,
-		- create a database schema yourself and delete all instances of ```CREATE DATABASE  IF NOT EXISTS `dawid_movieinventory```` from every script that contains it and change all instances of ```USE `dawid_movieinventory`;``` to that of your manually created database schema.
+		- create a database schema yourself and delete all instances of ```CREATE DATABASE  IF NOT EXISTS dawid_movieinventory``` from every script that contains it and change all instances of ```USE dawid_movieinventory;``` to that of your manually created database schema.
 - The username to access this schema is *dawid_movieinventory* and has at last *delete*, *select*, *insert*, and *update* permissions.
 	- If this name isn't possible on th environment, you will need to create your own user account that has the aformentioned permissions.
 
@@ -50,6 +50,6 @@ Inside the *api* folder, you will find one PHP files named *index.php* that cont
 Once the necessary changes are made, save the changes.
 	 
 ### Presentation Tier
-The presentation tier comes precompiled and ready to be deployed on your environment.  To use the precompiled code, ensure that the contents of the *dist* folder are on root level of your web server.  In the case of Apache HTTP server, this will be right in the *htdocs* folder.  You will be able to access it through the following url once your instance of Apache HTTP server is running with the code placed in the root director: http://localhost/.  If you choose to place the code in a subfolder, the files will need to be modified to work in a subdirectory; this is beyond the scope of this guide.
+The presentation tier comes precompiled and ready to be deployed on your environment.  To use the precompiled code, ensure that the contents of the *dist* folder are on root level of your web server; don't put the *dist* folder itself on the root level of your web server.  In the case of Apache HTTP server, this will be right in the *htdocs* folder.  You will be able to access it through the following url once your instance of Apache HTTP server is running with the code placed in the root director: http://localhost/.  If you choose to place the code in a subfolder within the root directory, the files will need to be modified to work in a subdirectory; this is beyond the scope of this guide.
 
 Source code for the presentation tier can be found in the *movie-inventory-app* directory; it includes the entire Angular presentation tier source code where you're able to compile it yourself.
