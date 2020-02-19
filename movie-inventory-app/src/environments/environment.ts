@@ -5,7 +5,6 @@
 export const environment =
 {
 	production: false,
-	//apiURL: "https://dawid.ca/api/movieInventory/index.php"
 	apiURL: "http://localhost/api/index.php"
 };
 
