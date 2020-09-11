@@ -189,7 +189,7 @@ export class MovieDetailsComponent implements OnInit
 		let json =
 		{
 			action: "deleteAllActorsToMovie",
-			movieID: movieID,
+			movieID: movieID
 		};
 
 		this.apiService.call(JSON.stringify(json)).subscribe(response =>
